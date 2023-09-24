@@ -1,0 +1,18 @@
+.masterBtn {
+    background-color: #fab75fcb;
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 800;
+    border-radius: 1rem;
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.disabled {
+    background-color: #f1d2a8;
+}

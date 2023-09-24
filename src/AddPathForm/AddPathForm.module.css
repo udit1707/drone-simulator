@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1rem;
+  justify-content: space-evenly;
+}
+
+.inputField {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+
+.label {
+  margin-bottom: 0.5rem;
+}
+
+input {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-width: 0 0 2px 0;
+  border-style: none none solid none;
+  border-color: transparent transparent #000 transparent;
+}
+
+.errorStatus {
+  font-size: 1rem;
+  color: red;
+  font-weight: 300;
+}
+
+.btnCnt {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 2rem;
+}
