@@ -46,7 +46,7 @@ const Map = ({
         <Polyline
           path={path}
           options={{
-            strokeColor: "#FF0000",
+            strokeColor: "#ea8e0e",
             strokeOpacity: 1.0,
             strokeWeight: 2,
           }}
@@ -59,7 +59,6 @@ const Map = ({
 const DroneMapUI = () => {
   const { paths } = useSelector(allPathSelector);
   const navigate = useNavigate();
-  console.log(paths);
   const [selectedOption, setSelectedOption] = useState(null);
   const [markerPosition, setMarkerPosition] = useState({
     lat: 26.490563917845076,
@@ -86,7 +85,6 @@ const DroneMapUI = () => {
       lat: i.lat,
       lng: i.lng,
     }));
-    console.log(pathModified);
     setPath(pathModified);
     if (currentIndex >= path.length) {
       setCurrentIndex(0);
@@ -107,7 +105,6 @@ const DroneMapUI = () => {
     let interval;
 
     if (isSimulating && !isPaused) {
-      console.log("Running");
       interval = setTimeout(() => {
         setCurrentIndex((currentIndex) => {
           if (currentIndex < path.length) {

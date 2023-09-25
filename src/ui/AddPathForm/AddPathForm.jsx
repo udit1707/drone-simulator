@@ -121,9 +121,7 @@ const AddPathForm = () => {
   const handleAddChk = () => {
     if (validateInputs()) {
       setCurrentPath((prev) => {
-        console.log(prev);
         const newPath = [...prev, formData];
-        console.log(newPath);
         return newPath;
       });
       initSetFormDate();
@@ -133,7 +131,6 @@ const AddPathForm = () => {
   };
 
   const getTimestamp = (date, time) => {
-    console.log(date, time);
     if (!date || !time) {
       return "";
     }
@@ -145,20 +142,15 @@ const AddPathForm = () => {
     }
 
     const timestampMilliseconds = dateTime.getTime();
-    console.log(timestampMilliseconds);
     return timestampMilliseconds;
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
-
-    console.log(formData);
-
+   
     setFormData((prev) => {
       if (name === "date" || name === "time") {
         const timestampVal = getTimestamp(prev.date.val, prev.time.val);
-        console.log(timestampVal);
         const newFormData = {
           ...prev,
           [name]: {
@@ -185,7 +177,6 @@ const AddPathForm = () => {
   };
 
   const handleSubmit = () => {
-    console.log("Submitting");
     if (name.trim() === "") {
       alert("Set Path Name");
       return;
@@ -193,7 +184,6 @@ const AddPathForm = () => {
     if (validateInputs()) {
       setCurrentPath((prev) => {
         const newMeta = [...prev, formData];
-        console.log(newMeta);
         return newMeta;
       });
       setSuccess(true);
@@ -209,7 +199,6 @@ const AddPathForm = () => {
         lng: Number(i.lng.val),
         timestamp: Number(i.timestamp.val),
       }));
-      console.log(newMeta);
       const newPath = {
         name: name,
         meta: [...newMeta],
