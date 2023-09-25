@@ -4,10 +4,12 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { IoPauseOutline, IoPlayOutline } from "react-icons/io5";
+import { BiCurrentLocation, BiTimeFive } from "react-icons/bi";
 import { allPathSelector } from "../../selectors/path";
 import { AiOutlinePlus } from "react-icons/ai";
 import MasterButton from "../../ui/MasterButton";
 import styles from "./DroneMapUI.module.css";
+import DroneStatusInfo from "../../ui/DroneStatusInfo";
 
 const Map = ({
   markerPosition,
@@ -125,6 +127,11 @@ const DroneMapUI = () => {
 
   return (
     <div className={styles.container}>
+      <DroneStatusInfo
+        selectedOption={selectedOption}
+        currentIndex={currentIndex}
+        path={path}
+      />
       <div className={styles.mapBox}>
         <Map
           markerPosition={markerPosition}
@@ -155,7 +162,6 @@ const DroneMapUI = () => {
       ) : (
         <h3>No Path to Select!!</h3>
       )}
-
       <div className={styles.btnContainer}>
         <MasterButton handleClick={() => navigate("/new-path")}>
           <AiOutlinePlus className={styles.icon} />

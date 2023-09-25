@@ -24,15 +24,10 @@ const FileUpload = () => {
       return;
     }
 
-    console.log(file);
-
     Parser.parse(file, {
       complete: (result) => {
         const data = result.data;
-        const header = data[0];
         const index = data.findIndex((i) => i[2] === "");
-        console.log(data);
-        console.log(index);
         const parsedData = data.slice(1, index);
 
         const paths = parsedData.map((item) => {
@@ -43,8 +38,6 @@ const FileUpload = () => {
             timestamp: Number(timestamp),
           };
         });
-
-        console.log(paths);
 
         setUploadedData(paths);
         setSuccess(true);
@@ -74,12 +67,12 @@ const FileUpload = () => {
       meta: [...uploadedData],
     };
 
-    console.log(newPath);
     dispatch(submitPath(newPath));
     setUploadedData([]);
     setSuccess(false);
     setPathName("");
     setFileName("");
+    alert("Path Added Success!");
   };
 
   return (

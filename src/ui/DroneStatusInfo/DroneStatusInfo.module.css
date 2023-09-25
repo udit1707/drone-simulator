@@ -1,0 +1,27 @@
+.droneStatusInfo {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 50%;
+}
+
+.positionText {
+  display: flex;
+  align-items: center;
+  flex: 1 0 0;
+}
+
+.timestampText {
+  display: flex;
+  align-items: center;
+}
+
+.statusIcon {
+  margin-right: 0.5rem;
+}
+
+.fillerDiv {
+    height: 3rem;
+}

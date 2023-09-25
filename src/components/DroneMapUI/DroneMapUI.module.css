@@ -7,7 +7,6 @@
 }
 
 .mapBox {
-  margin-top: 3rem;
   border: 2px solid #fab75fcb;
   border-radius: 0.5rem;
   height: 50vh;
@@ -42,16 +41,16 @@
 }
 
 .item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-left: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 1rem;
 }
 
 .radioInp {
-    margin: 0;
+  margin: 0;
 }
 
 .itemName {
-    margin-left: 0.5rem;
+  margin-left: 0.5rem;
 }

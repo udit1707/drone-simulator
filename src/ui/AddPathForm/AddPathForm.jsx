@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import MasterButton from "../MasterButton";
 import { submitPath } from "../../store/path";
 import styles from "./AddPathForm.module.css";
+import CheckpointCard from "../CheckpointCard";
 
 const initialFormData = {
   lat: {
@@ -147,7 +148,7 @@ const AddPathForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-   
+
     setFormData((prev) => {
       if (name === "date" || name === "time") {
         const timestampVal = getTimestamp(prev.date.val, prev.time.val);
@@ -208,6 +209,7 @@ const AddPathForm = () => {
       setCurrentPath([]);
       initSetFormDate();
       setName("");
+      alert("Path Added!");
     }
   }, [currentPath, success, formData]);
 
@@ -277,6 +279,7 @@ const AddPathForm = () => {
         </MasterButton>
         <MasterButton handleClick={handleSubmit}>Submit Path</MasterButton>
       </div>
+      {<CheckpointCard checkpoints={currentPath} />}
     </div>
   );
 };
