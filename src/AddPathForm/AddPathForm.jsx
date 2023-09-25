@@ -204,9 +204,15 @@ const AddPathForm = () => {
 
   useEffect(() => {
     if (success) {
+      const newMeta = currentPath.map((i) => ({
+        lat: Number(i.lat.val),
+        lng: Number(i.lng.val),
+        timestamp: Number(i.timestamp.val),
+      }));
+      console.log(newMeta);
       const newPath = {
         name: name,
-        meta: [...currentPath],
+        meta: [...newMeta],
       };
       dispatch(submitPath(newPath));
       setSuccess(false);
@@ -264,6 +270,7 @@ const AddPathForm = () => {
         <span className={styles.label}>Path Name:</span>
         <input
           type="text"
+          placeholder="Enter Path Name"
           value={name}
           onChange={(e) => {
             setName(e.target.value);

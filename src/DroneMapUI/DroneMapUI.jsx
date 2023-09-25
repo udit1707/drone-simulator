@@ -80,8 +80,8 @@ const DroneMapUI = () => {
     //   { lat: 26.15495028182575, lng: 80.16823934080898 },
     // ];
     const pathModified = selectedOption.meta.map((i) => ({
-      lat: Number(i.lat.val),
-      lng: Number(i.lng.val),
+      lat: i.lat,
+      lng: i.lng,
     }));
     console.log(pathModified);
     setPath(pathModified);
@@ -130,15 +130,16 @@ const DroneMapUI = () => {
       </div>
       {paths.length > 0 ? (
         <div className={styles.paths}>
+          <h3>Select a path: </h3>
           {paths.map((i, index) => {
             return (
               <div key={index} className={styles.item}>
                 <input
                   type="radio"
-                  //   name="radio-options"
                   value={i.name}
                   checked={selectedOption?.name === i.name}
                   onChange={() => handleRadioChange(i)}
+                  className={styles.radioInp}
                 />
                 <span className={styles.itemName}>{i.name}</span>
               </div>
@@ -146,11 +147,11 @@ const DroneMapUI = () => {
           })}
         </div>
       ) : (
-        <div>No Path to Select!!</div>
+        <h3>No Path to Select!!</h3>
       )}
 
       <div className={styles.btnContainer}>
-        <MasterButton handleClick={() => navigate("/add-path")}>
+        <MasterButton handleClick={() => navigate("/new-path")}>
           <AiOutlinePlus className={styles.icon} />
           Add Path
         </MasterButton>

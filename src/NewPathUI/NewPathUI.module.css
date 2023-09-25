@@ -1,0 +1,33 @@
+.cnt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.tab {
+  flex-basis: 50%;
+  text-align: center;
+  background-color: #f1d2a8;
+  color: white;
+  border: 1px solid #f1d2a8;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.active {
+  background-color: #fab75fcb;
+  border-color: #fab75fcb;
+}
+
+.content {
+  margin-top: 1rem;
+}
