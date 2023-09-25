@@ -1,12 +1,12 @@
-import { useDropzone } from "react-dropzone";
-import Parser from "papaparse";
-import { useDispatch } from "react-redux";
-import { submitPath } from "../store/path";
-
-import styles from "./FileUpload.module.css";
-import MasterButton from "../MasterButton";
 import { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useDropzone } from "react-dropzone";
+
+import Parser from "papaparse";
+import { submitPath } from "../../store/path";
+import MasterButton from "../MasterButton";
+import styles from "./FileUpload.module.css";
 
 const FileUpload = () => {
   const navigate = useNavigate();
@@ -78,6 +78,8 @@ const FileUpload = () => {
     dispatch(submitPath(newPath));
     setUploadedData([]);
     setSuccess(false);
+    setPathName("");
+    setFileName("");
   };
 
   return (

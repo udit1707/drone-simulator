@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { GoogleMap, MarkerF, Polyline } from "@react-google-maps/api";
-
-import styles from "./DroneMapUI.module.css";
-import MasterButton from "../MasterButton";
-import { IoPauseOutline, IoPlayOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
-import { allPathSelector } from "../selectors/path";
 import { useNavigate } from "react-router-dom";
+
+import { IoPauseOutline, IoPlayOutline } from "react-icons/io5";
+import { allPathSelector } from "../../selectors/path";
 import { AiOutlinePlus } from "react-icons/ai";
+import MasterButton from "../../ui/MasterButton";
+import styles from "./DroneMapUI.module.css";
 
 const Map = ({
   markerPosition,
@@ -37,7 +37,7 @@ const Map = ({
         draggable={true}
         onDragEnd={handleMarkerPositionChange}
         icon={{
-          url: require("../assets/drone.svg").default,
+          url: require("../../assets/drone.svg").default,
           scaledSize: new window.google.maps.Size(50, 50),
           anchor: new window.google.maps.Point(25, 25),
         }}
@@ -71,8 +71,11 @@ const DroneMapUI = () => {
   });
   const [path, setPath] = useState([]);
   const [isSimulating, setIsSimulating] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleStartSimulation = () => {
+    if (!selectedOption) return;
     // const simulatedPath = [
     //   { lat: 26.48598788148077, lng: 80.34623322394918 },
     //   { lat: 26.42531294623219, lng: 80.393868541767 },
@@ -85,7 +88,11 @@ const DroneMapUI = () => {
     }));
     console.log(pathModified);
     setPath(pathModified);
+    if (currentIndex >= path.length) {
+      setCurrentIndex(0);
+    }
     setIsSimulating(true);
+    setIsPaused(false);
   };
 
   const handleRadioChange = (i) => {
@@ -97,25 +104,27 @@ const DroneMapUI = () => {
   };
 
   useEffect(() => {
-    let timestamp = 0;
     let interval;
 
-    if (isSimulating) {
+    if (isSimulating && !isPaused) {
       console.log("Running");
-      interval = setInterval(() => {
-        if (timestamp < path.length) {
-          setMarkerPosition(path[timestamp]);
-          setMapCenter(path[timestamp]);
-          timestamp += 1;
-        } else {
-          setIsSimulating(false);
-          clearInterval(interval);
-        }
+      interval = setTimeout(() => {
+        setCurrentIndex((currentIndex) => {
+          if (currentIndex < path.length) {
+            setMarkerPosition(path[currentIndex]);
+            setMapCenter(path[currentIndex]);
+            return currentIndex + 1;
+          } else {
+            setIsSimulating(false);
+            clearInterval(interval);
+            return currentIndex;
+          }
+        });
       }, 5000);
     }
 
     return () => clearInterval(interval);
-  }, [isSimulating, path, setMarkerPosition, setMapCenter]);
+  }, [isSimulating, path, isPaused, currentIndex]);
 
   return (
     <div className={styles.container}>
@@ -157,16 +166,16 @@ const DroneMapUI = () => {
         </MasterButton>
         <MasterButton
           handleClick={handleStartSimulation}
-          disabled={isSimulating}
+          disabled={isSimulating && !isPaused}
         >
           <IoPlayOutline className={styles.icon} />
           Start Simulation
         </MasterButton>
         <MasterButton
           handleClick={() => {
-            setIsSimulating(false);
+            setIsPaused(true);
           }}
-          disabled={!isSimulating}
+          disabled={!isSimulating || isPaused}
         >
           <IoPauseOutline className={styles.icon} />
           Pause Simulation
